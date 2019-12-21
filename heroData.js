@@ -12,7 +12,7 @@ conn.connect();
 module.exports = {
     //获取所有英雄
     getAllHero(callback) {
-        let sql = 'select * from users'
+        let sql = 'select * from users where isDelete=0 '
         conn.query(sql,(err, result)=> {
             // console.log(err);
             if(err) return callback(err);
@@ -46,16 +46,29 @@ module.exports = {
     //修改英雄
     editHero(edithero,callback) {
         let {id} = edithero;
-        console.log(id);
-        
+        // console.log(id);
         edithero.date = moment().format('YYYY-MM-DD');
         let sql = 'update users set ? where id=?';
         conn.query(sql,[edithero,id],(err,result)=> {
-            if(err) return callback(false);;
+            if(err) return callback(false);
             
             //
             callback(true)
             // console.log(result);
+            
+        })
+    },
+    //删除英雄
+    deleteHero(id,callback) {
+        let sql = 'update users set isDelete = 1 where id=?';
+        conn.query(sql,[id],(err,result)=> {
+            if(err) return console.log(err);
+            
+            // callback(false);
+            
+            //
+            callback(true)
+            console.log(result);
             
         })
     }

@@ -21,7 +21,7 @@
           <td>
             <a href="./info?id=<%= data[i].id %>">查看</a>
             <a href="./edit?id=<%= data[i].id %>">编辑</a>
-            <a href="javascript:;">删除</a>
+            <a href="javascript:;" data-id="<%= data[i].id %>" class="delete">删除</a>
           </td>
         </tr>
         <% } %>
@@ -73,3 +73,26 @@
     </table>
   </div>
 <%- include('./layout/footer.ejs')%>
+<script>
+  $('.delete').on('click',function() {
+    if(confirm('你确定要删除？')) {
+      let id = $(this).data('id');
+    // console.log(id);
+    $.get({
+      type: 'get',
+      url: '/deleteHero',
+      data: {
+        id: id
+      },
+      dataType:'json',
+      success: function (res) {
+        // console.log(res);
+        if(res.code == 200) {
+          window.location.reload();
+        }
+      }
+    })
+    }
+    
+  })
+</script>

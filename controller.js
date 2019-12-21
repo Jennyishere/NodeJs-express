@@ -81,7 +81,7 @@ module.exports = {
     //编辑英雄
     editHero(req,res) {
         let {id} = url.parse(req.url,true).query;
-            console.log(id);
+            // console.log(id);
         let str = '';
         req.on('data',chunk=> {
             str += chunk;
@@ -101,6 +101,23 @@ module.exports = {
                 msg: '修改成功'
             })
             })
+        })
+    },
+    //删除英雄
+    deleteHero(req,res) {
+        let {id} = url.parse(req.url,true).query;
+        // console.log(id);
+        heroDta.deleteHero(id,(err)=> {
+            if(!err) {
+                return res.send({
+                code: 201,
+                msg: '删除失败'
+            })
+        }
+        res.send({
+            code: 200,
+            msg: '删除成功'
+        })
         })
     }
 }
