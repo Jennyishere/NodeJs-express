@@ -6,6 +6,10 @@
         <input type="text" name="name" class="form-control" placeholder="请输入英雄名称">
       </div>
       <div class="form-group">
+        <label>英雄地址</label>
+        <input type="text" name="address" class="form-control" placeholder="请输入英雄地址">
+      </div>
+      <div class="form-group">
         <label>英雄性别</label>
         <div class="radio">
           <label>
@@ -21,3 +25,22 @@
   </div>
   <%- include('./layout/footer.ejs')%>
 
+<script>
+  $('.btn-success').on('click',function(e) {
+    e.preventDefault();
+    // console.log(123);
+    $.ajax({
+      type: 'post',
+      url: './addHero',
+      data: $('#form').serialize(),
+      success: function(res) {
+        console.log(res);
+        if(res.code == 200 ) {
+          window.location.href = './'
+        }
+        
+      }
+    })
+    
+  })
+</script>

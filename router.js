@@ -17,6 +17,9 @@ router.get('/',(req,res)=> {
 .get('/info',(req,res)=> {
     controller.getInfoPage(req,res)
 })
+.post('/addHero',(req,res)=> {
+    controller.addHero(req,res)
+})
 
 //暴露路由
 module.exports = router;
