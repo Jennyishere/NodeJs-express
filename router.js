@@ -20,6 +20,8 @@ router.get('/',(req,res)=> {
 .post('/addHero',(req,res)=> {
     controller.addHero(req,res)
 })
-
+.post('/editHero',(req,res)=> {
+    controller.editHero(req,res)
+})
 //暴露路由
 module.exports = router;

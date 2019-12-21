@@ -42,5 +42,21 @@ module.exports = {
             // console.log(result);
             
         })
+    },
+    //修改英雄
+    editHero(edithero,callback) {
+        let {id} = edithero;
+        console.log(id);
+        
+        edithero.date = moment().format('YYYY-MM-DD');
+        let sql = 'update users set ? where id=?';
+        conn.query(sql,[edithero,id],(err,result)=> {
+            if(err) return callback(false);;
+            
+            //
+            callback(true)
+            // console.log(result);
+            
+        })
     }
 }

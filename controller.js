@@ -21,8 +21,20 @@ module.exports = {
     getAddPage(req,res) {
         res.render('add',{});
     },
+    //编辑页面
     getEditPage(req,res) {
-        res.render('edit',{});
+        // 前面的显示数据的步骤与info的相似
+        let {id} = url.parse(req.url,true).query;
+        heroDta.getOneHero(id,(err,data)=> {
+            if(err) {
+                return res.send(JSON.stringify({
+                code: 201,
+                msg: '获取数据出错'
+            }))
+        }
+        res.render('edit',{data:data});
+        })
+       
     },
     //加载info页面
     getInfoPage(req,res) {
@@ -65,5 +77,30 @@ module.exports = {
         })
         
        
+    },
+    //编辑英雄
+    editHero(req,res) {
+        let {id} = url.parse(req.url,true).query;
+            console.log(id);
+        let str = '';
+        req.on('data',chunk=> {
+            str += chunk;
+        })
+        req.on('end',()=> {
+            let edithero = querystring.parse(str);
+            // console.log(edithero);
+            heroDta.editHero(edithero,(err)=> {
+                if(!err) {
+                    return res.send({
+                    code: 201,
+                    msg: '修改失败'
+                })
+            }
+            res.send({
+                code: 200,
+                msg: '修改成功'
+            })
+            })
+        })
     }
 }

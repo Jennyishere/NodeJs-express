@@ -6,6 +6,7 @@
         <th>编号</th>
         <th>名称</th>
         <th>性别</th>
+        <th>地址</th>
         <th>创建时间</th>
         <th>操作</th>
       </thead>
@@ -15,6 +16,7 @@
           <td><%= i +1 %></td>
           <td><%= data[i].name %></td>
           <td><%= data[i].gender %></td>
+          <td><%= data[i].address %></td>
           <td><%= data[i].date %></td>
           <td>
             <a href="./info?id=<%= data[i].id %>">查看</a>

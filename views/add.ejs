@@ -33,6 +33,7 @@
       type: 'post',
       url: './addHero',
       data: $('#form').serialize(),
+      dataType:'json',
       success: function(res) {
         console.log(res);
         if(res.code == 200 ) {
